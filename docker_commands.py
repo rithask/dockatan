@@ -1,3 +1,4 @@
+import datetime
 import docker
 import json
 
@@ -58,3 +59,16 @@ def list_images():
 def save_json(data, filename):
 	with open(filename, 'w') as f:
 		json.dump(data, f, indent=4)
+
+		
+# Extra functions
+
+def clean_time(s):
+    k=s[:10]
+    y=int(k[:4])
+    m = int(k[5:7])
+    d=int(k[9:10])
+    x = datetime.datetime(y,m,d)
+    date = x.strftime("%Y %b %d ")
+    return date
+
