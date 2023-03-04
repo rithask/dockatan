@@ -16,7 +16,7 @@ def list_running_container():
 		container_list[i]["image"] = container.image.tags[0]
 		ports = container.ports
 		container_list[i]["ports"] = list(ports.keys())
-		container_list[i]["created"] = container.attrs["Created"]
+		container_list[i]["created"] = clean_time(container.attrs["Created"])
 
 		i += 1
 	return container_list
@@ -30,7 +30,7 @@ def list_terminated_container():
 		container_list[i]["image"] = container.image.tags[0]
 		ports = container.ports
 		container_list[i]["ports"] = list(ports.keys())
-		container_list[i]["created"] = container.attrs["Created"]
+		container_list[i]["created"] = clean_time(container.attrs["Created"])
 		
 		i += 1
 
