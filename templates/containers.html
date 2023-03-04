@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block main %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Running containers</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Image</th>
+							<th scope="col">Ports</th>
+							<th scope="col">Created</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for container in running %}
+						<tr>
+							<td>{{ container.name }}</td>	
+							<td>{{ container.image }}</td>
+							<td>{% for port in container.ports %} {{ port }}, {% endfor %}</td>
+							<td>{{ container.created }}</td>
+							<td>
+								<form method="POST">
+									<input type="hidden" name="stopBtn" value="{{ container.name }}">
+									<button type="submit" class="btn btn-danger">Stop</button>
+								</form>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<h1>Terminated containers</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Image</th>
+							<th scope="col">Created</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for container in exited %}
+						<tr>
+							<td>{{ container.name }}</td>	
+							<td>{{ container.image }}</td>
+							<td>{{ container.created }}</td>
+							<td>
+								<form method="POST">
+									<input type="hidden" name="startBtn" value="{{ container.name }}">
+									<button type="submit" class="btn btn-success">Start</button>
+								</form>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>	
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block main %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Images</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Image ID</th>
+							<th scope="col">Repository</th>
+							<th scope="col">Tag</th>
+							<th scope="col">Created</th>
+							<th scope="col">Size</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for image in images %}
+						<tr>
+							<td>{{ image.id }}</td>
+							<td>{{ image.repository }}</td>
+							<td>{{ image.tag }}</td>
+							<td>{{ image.created }}</td>
+							<td>{{ image.size }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
