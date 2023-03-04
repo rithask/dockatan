@@ -69,6 +69,6 @@ def clean_time(s):
     m = int(k[5:7])
     d=int(k[9:10])
     x = datetime.datetime(y,m,d)
-    date = x.strftime("%Y %b %d ")
+    date = x.strftime("%Y %b %d") +" "+ str(s[11:16])
     return date
 
