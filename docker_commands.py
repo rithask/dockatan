@@ -51,11 +51,22 @@ def start_container(container_name):
 # Image commands
 
 def list_images():
-	image_list = {}
+	image_list = []
+	i = 0
 	for image in client.images.list():
-		image_list["name"] = image.tags[0]
-		image_list["id"] = image.id
-		
+		image_list.append({})
+		try:
+			image_list[i]["repository"] = image.tags[0].split(":")[0]
+			image_list[i]["tag"] = image.tags[0].split(":")[1]
+		except:
+			image_list[i]["repository"] = "None"
+			image_list[i]["tag"] = "None"
+		image_list[i]["id"] = image.id[7:19]
+		image_list[i]["created"] = clean_time(image.attrs["Created"])
+		size = int(image.attrs["Size"])/(10**6)
+		image_list[i]["size"] = str(round(size,2)) + " MB"
+
+		i += 1
 	return image_list
 
 # save json
