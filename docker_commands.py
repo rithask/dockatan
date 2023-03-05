@@ -74,6 +74,3 @@ def clean_time(s):
     x = datetime.datetime(y,m,d)
     date = x.strftime("%Y %b %d") +" "+ str(s[11:16])
     return date
-
-running = list_running_container()
-print(running)
