@@ -63,8 +63,6 @@ def save_json(data, filename):
 		
 # Extra functions
 
-
-from datetime import datetime
 def clean_time(s):
     date,time = s.split("T")
     date_string = date +" "+time[:5]
