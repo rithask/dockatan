@@ -27,7 +27,10 @@ def list_terminated_container():
 	for container in client.containers.list(filters = {"status": "exited"}):
 		container_list.append({})
 		container_list[i]["name"] = container.name
-		container_list[i]["image"] = container.image.tags[0]
+		try:
+			container_list[i]["image"] = container.image.tags[0]
+		except:
+			container_list[i]["image"] = "None"
 		ports = container.ports
 		container_list[i]["ports"] = list(ports.keys())
 		container_list[i]["created"] = clean_time(container.attrs["Created"])
@@ -72,3 +75,5 @@ def clean_time(s):
     date = x.strftime("%Y %b %d") +" "+ str(s[11:16])
     return date
 
+running = list_running_container()
+print(running)
