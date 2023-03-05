@@ -47,6 +47,16 @@ def start_container(container_name):
 	container = client.containers.get(container_name)
 	container.start()
 
+def check_container_image(image_name):
+	for container in client.containers.list(all):
+		if container.image.tags[0] == image_name:
+			return True
+	return False
+
+def delete_container(container_name):
+	container = client.containers.get(container_name)
+	container.remove()
+
 
 # Image commands
 
@@ -58,12 +68,15 @@ def list_images():
 		
 	return image_list
 
-# save json
-def save_json(data, filename):
-	with open(filename, 'w') as f:
-		json.dump(data, f, indent=4)
+def delete_image(image_name):
+	if check_container_image(image_name) == False:
+		image = client.images.get(image_name)
+		image.remove()
+		return True
+	else:
+		return False
 
-		
+
 # Extra functions
 
 def clean_time(s):
