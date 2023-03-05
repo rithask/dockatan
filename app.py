@@ -34,5 +34,5 @@ def containers():
 
 @app.route('/images')
 def images():
-	return render_template('images.html')
-
+	images = list_images()
+	return render_template('images.html', images=images)
