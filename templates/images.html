@@ -12,9 +12,9 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th scope="col">Image ID</th>
 							<th scope="col">Repository</th>
 							<th scope="col">Tag</th>
+							<th scope="col">Image ID</th>
 							<th scope="col">Created</th>
 							<th scope="col">Size</th>
 						</tr>
@@ -22,9 +22,9 @@
 					<tbody>
 						{% for image in images %}
 						<tr>
-							<td>{{ image.id }}</td>
 							<td>{{ image.repository }}</td>
 							<td>{{ image.tag }}</td>
+							<td>{{ image.id }}</td>
 							<td>{{ image.created }}</td>
 							<td>{{ image.size }}</td>
 						</tr>
