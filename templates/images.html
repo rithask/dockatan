@@ -8,6 +8,11 @@
 			</div>
 		</div>
 		<div class="row">
+			{% if get_flashed_messages() %}
+				<div class="alert alert-primary border text-center" role="alert">
+					{{ get_flashed_messages() | join (" ") }}
+				</div>
+			{% endif %}
 			<div class="col">
 				<table class="table table-striped">
 					<thead>
@@ -17,6 +22,7 @@
 							<th scope="col">Image ID</th>
 							<th scope="col">Created</th>
 							<th scope="col">Size</th>
+							<th scope="col">Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,6 +33,13 @@
 							<td>{{ image.id }}</td>
 							<td>{{ image.created }}</td>
 							<td>{{ image.size }}</td>
+							<td>
+								<form method="POST">
+									<input type="hidden" name="repo" value="{{ image.repository }}">
+									<input type="hidden" name="tag" value="{{ image.tag }}">
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form>
+							</td>
 						</tr>
 						{% endfor %}
 					</tbody>

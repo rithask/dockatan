@@ -5,7 +5,7 @@ import json
 try:
 	client = docker.from_env()
 except BaseException:
-	print("Run the docker engine first")
+	print("Error: Run the docker engine first")
 	exit(0)
 
 
@@ -51,7 +51,7 @@ def start_container(container_name):
 	container = client.containers.get(container_name)
 	container.start()
 
-def check_container_image(image_name):
+def check_running_containers(image_name):
 	for container in client.containers.list(all):
 		if container.image.tags[0] == image_name:
 			return True
@@ -84,7 +84,7 @@ def list_images():
 	return image_list
 
 def delete_image(image_name):
-	if check_container_image(image_name) == False:
+	if check_running_containers(image_name) == False:
 		image = client.images.get(image_name)
 		image.remove()
 		return True
