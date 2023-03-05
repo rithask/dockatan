@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import docker
 import json
 
@@ -95,10 +95,8 @@ def delete_image(image_name):
 # Extra functions
 
 def clean_time(s):
-    k=s[:10]
-    y=int(k[:4])
-    m = int(k[5:7])
-    d=int(k[9:10])
-    x = datetime.datetime(y,m,d)
-    date = x.strftime("%Y %b %d") +" "+ str(s[11:16])
-    return date
+    date,time = s.split("T")
+    date_string = date +" "+time[:5]
+    date_obj = datetime.strptime(date_string, "%Y-%m-%d %H:%M")
+    formated_date = date_obj.strftime("%b %d %Y, %I:%M %p")
+    return formated_date
