@@ -2,7 +2,11 @@ import datetime
 import docker
 import json
 
-client = docker.from_env()
+try:
+	client = docker.from_env()
+except BaseException:
+	print("Run the docker engine first")
+	exit(0)
 
 
 # Container commands
